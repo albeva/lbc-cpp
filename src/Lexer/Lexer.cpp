@@ -53,7 +53,7 @@ void Lexer::next(Token& token)
         auto ch = *m_input;
         switch (ch) {
         case '\0':
-            return make(token, TokenKind::EndOfFile, 0);
+            return fileEnd(token);
         case ' ':
         case '\t':
             m_input++;
@@ -91,7 +91,7 @@ void Lexer::next(Token& token)
                 return number(token);
             }
 
-            return make(token, TokenKind::Invalid, 1);
+            return invalid(token);
         }
     }
 }
@@ -154,6 +154,7 @@ void Lexer::identifier(Token& token)
     switch (kind) {
     case TokenKind::Identifier:
         token.set(kind, loc(start), m_context->retainUniqueCopy(upppercased));
+        break;
     default:
         token.set(kind, loc(start));
     }
@@ -173,6 +174,21 @@ void Lexer::number(Token& token)
         fatalError("FIXME: handle invalid integers");
     }
     token.set(TokenKind::IntegerLiteral, loc(start), value);
+}
+
+void Lexer::fileEnd(Token& token)
+{
+    if (m_emitEndOfStmt) {
+        return make(token, TokenKind::EndOfStmt, 0);
+    }
+    return make(token, TokenKind::EndOfFile, 0);
+}
+
+void Lexer::invalid(Token& token)
+{
+    const auto* start = m_input;
+    m_input++;
+    token.set(TokenKind::Invalid, loc(start));
 }
 
 SourceLoc Lexer::loc(const char* start) const

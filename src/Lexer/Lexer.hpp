@@ -15,18 +15,20 @@ public:
     void next(Token& token);
 
 private:
+    void skipUntilLineEnd();
     void make(Token& token, TokenKind kind, size_t len = 1);
     void string(Token& token);
     void identifier(Token& token);
+    void number(Token& token);
+    void fileEnd(Token& token);
+    void invalid(Token& token);
 
-    void skipUntilLineEnd();
     [[nodiscard]] SourceLoc loc(const char* start) const;
 
     Source* m_source;
     Context* m_context;
     const char* m_input;
     bool m_emitEndOfStmt;
-    void number(Token& token);
 };
 
 } // namespace lbc

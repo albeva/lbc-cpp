@@ -15,6 +15,11 @@ set(GIT_SHA
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_C_STANDARD 90)
 
+# strongly encouraged to enable this globally to avoid conflicts between
+# -Wpedantic being enabled and -std=c++20 and -std=gnu++20 for example
+# when compiling with PCH enabled
+set(CMAKE_CXX_EXTENSIONS OFF)
+
 # Note: by default ENABLE_DEVELOPER_MODE is True
 # This means that all analysis (sanitizers, static analysis)
 # is enabled and all warnings are treated as errors
@@ -22,11 +27,6 @@ set(CMAKE_C_STANDARD 90)
 set(ENABLE_DEVELOPER_MODE
     TRUE
     CACHE BOOL "Enable 'developer mode'")
-
-# strongly encouraged to enable this globally to avoid conflicts between
-# -Wpedantic being enabled and -std=c++20 and -std=gnu++20 for example
-# when compiling with PCH enabled
-set(CMAKE_CXX_EXTENSIONS OFF)
 
 # Fail on warnings
 set(WARNINGS_AS_ERRORS ON)
@@ -70,7 +70,6 @@ project_options(
     ENABLE_PCH
     WARNINGS_AS_ERRORS)
 
-target_compile_features(project_options INTERFACE cxx_std_${CMAKE_CXX_STANDARD})
 if(MSVC)
     target_compile_options(project_options INTERFACE "/Zc:__cplusplus")
 endif()
@@ -80,7 +79,7 @@ add_subdirectory(configured_files)
 add_subdirectory(src)
 
 # Tests
-if (ENABLE_DEVELOPER_MODE)
+if(ENABLE_DEVELOPER_MODE)
     add_subdirectory(tests)
 endif()
 

@@ -1,17 +1,13 @@
 # Tests
-add_executable(tests
-    LexerTests.cpp)
+add_executable(tests LexerTests.cpp)
 
-Include(FetchContent)
+include(FetchContent)
 FetchContent_Declare(
     Catch2
     GIT_REPOSITORY https://github.com/catchorg/Catch2.git
-    GIT_TAG        v3.3.2
-)
+    GIT_TAG v3.3.2)
 FetchContent_MakeAvailable(Catch2)
-target_link_libraries(tests PRIVATE
-    lbc_lib
-    Catch2::Catch2WithMain)
+target_link_libraries(tests PRIVATE lbc_lib project_options Catch2::Catch2WithMain)
 
 list(APPEND CMAKE_MODULE_PATH ${catch2_SOURCE_DIR}/extras)
 include(CTest)
