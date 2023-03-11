@@ -20,25 +20,35 @@ constexpr std::array kTokens {
     // operators
     "("sv,
     ")"sv,
+    "["sv,
+    "]"sv,
     ","sv,
+    "="sv,
     // control Keywords
-    "IMPORT"sv,
-    "DECLARE"sv,
-    "SUB"sv,
-    "FUNCTION"sv,
     "AS"sv,
+    "DDECLARE"sv,
+    "END"sv,
+    "EXTERN"sv,
+    "FUNCTION"sv,
+    "IMPORT"sv,
+    "SUB"sv,
     // type keywords
     "INTEGER"sv,
-    "STRING"sv
+    "ZSTRING"sv
 };
 
 const std::unordered_map<std::string_view, TokenKind> pKeywords {
-    { "IMPORT"sv, TokenKind::KwImport },
+    // keywords
+    { "AS"sv, TokenKind::KwAs },
     { "DECLARE"sv, TokenKind::KwDeclare },
-    { "SUB"sv, TokenKind::KwSub },
+    { "END"sv, TokenKind::KwEnd },
+    { "EXTERN"sv, TokenKind::KwExtern },
     { "FUNCTION"sv, TokenKind::KwFunction },
+    { "IMPORT"sv, TokenKind::KwImport },
+    { "SUB"sv, TokenKind::KwSub },
+    // types
     { "INTEGER"sv, TokenKind::TyInteger },
-    { "STRING"sv, TokenKind::TyString },
+    { "ZSTRING"sv, TokenKind::TyZString },
 };
 }
 

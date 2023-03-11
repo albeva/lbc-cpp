@@ -21,16 +21,21 @@ enum class TokenKind : unsigned {
     // operators
     ParenOpen,
     ParenClose,
+    BracketOpen,
+    BracketClose,
     Comma,
+    Assign,
     // control Keywords
-    KwImport,
-    KwDeclare,
-    KwSub,
-    KwFunction,
     KwAs,
+    KwDeclare,
+    KwEnd,
+    KwExtern,
+    KwFunction,
+    KwImport,
+    KwSub,
     // type keywords
     TyInteger,
-    TyString
+    TyZString
 };
 
 class Token final {

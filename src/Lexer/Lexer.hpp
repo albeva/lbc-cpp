@@ -16,6 +16,7 @@ public:
 
 private:
     void skipUntilLineEnd();
+    void skipToNextLine();
     void make(Token& token, TokenKind kind, size_t len = 1);
     void string(Token& token);
     void identifier(Token& token);

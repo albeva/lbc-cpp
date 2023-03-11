@@ -74,14 +74,27 @@ void Lexer::next(Token& token)
             m_input++;
             skipUntilLineEnd();
             continue;
+        case '_':
+            if (isIdentChar(m_input[1])) {
+                return identifier(token);
+            }
+            m_input++;
+            skipToNextLine();
+            continue;
         case '"':
             return string(token);
         case '(':
             return make(token, TokenKind::ParenOpen);
         case ')':
             return make(token, TokenKind::ParenClose);
+        case '[':
+            return make(token, TokenKind::BracketOpen);
+        case ']':
+            return make(token, TokenKind::BracketClose);
         case ',':
             return make(token, TokenKind::Comma);
+        case '=':
+            return make(token, TokenKind::Assign);
         default:
             if (isAlpha(ch)) {
                 return identifier(token);
@@ -99,6 +112,17 @@ void Lexer::next(Token& token)
 void Lexer::skipUntilLineEnd()
 {
     while (!isLineOrFileEnd(*m_input)) {
+        m_input++;
+    }
+}
+
+void Lexer::skipToNextLine()
+{
+    skipUntilLineEnd();
+    if (*m_input == '\r') {
+        m_input++;
+    }
+    if (*m_input == '\n') {
         m_input++;
     }
 }
