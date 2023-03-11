@@ -1,10 +1,18 @@
 # lbc library
 add_library(
     lbc_lib
+    Driver/Context.cpp
+    Driver/Context.hpp
+    Driver/Source.cpp
+    Driver/Source.hpp
+    Driver/SourceLoc.hpp
+    Lexer/Lexer.cpp
+    Lexer/Lexer.cpp
+    Lexer/Token.cpp
+    Lexer/Token.hpp
     pch.hpp
-    Lexer/Lexer.cpp
-    Lexer/Lexer.cpp
-)
+    Utils/Error.cpp
+    Utils/Error.hpp Utils/StringContainers.hpp)
 
 target_link_libraries(lbc_lib PRIVATE project_options project_warnings)
 target_precompile_headers(lbc_lib PRIVATE pch.hpp)
