@@ -2,8 +2,8 @@
 // Created by Albert on 11/03/2023.
 //
 #pragma once
-#include "Driver/SourceLoc.hpp"
 #include "pch.hpp"
+#include "Driver/SourceLoc.hpp"
 namespace lbc {
 
 enum class TokenKind : unsigned {

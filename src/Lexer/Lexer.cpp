@@ -168,7 +168,7 @@ void Lexer::number(Token& token)
         m_input++;
     }
 
-    uint64_t value{};
+    uint64_t value {};
     if (std::from_chars(start, m_input, value).ec != std::errc()) {
         fatalError("FIXME: handle invalid integers");
     }

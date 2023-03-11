@@ -2,8 +2,8 @@
 // Created by Albert on 04/03/2023.
 //
 #pragma once
-#include "Token.hpp"
 #include "pch.hpp"
+#include "Token.hpp"
 namespace lbc {
 class Context;
 class Source;

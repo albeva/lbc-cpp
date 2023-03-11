@@ -2,8 +2,8 @@
 // Created by Albert on 11/03/2023.
 //
 #pragma once
-#include "SourceLoc.hpp"
 #include "pch.hpp"
+#include "SourceLoc.hpp"
 namespace lbc {
 
 class SourceException final : public std::runtime_error {
